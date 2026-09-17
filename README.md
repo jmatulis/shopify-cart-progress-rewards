@@ -7,6 +7,8 @@ It has two halves:
 - **An embedded admin app** where the merchant sets reward tiers, wording and colors.
 - **A theme app extension** that renders the progress bar on the storefront.
 
+![The app's admin dashboard: reward tiers, messages, colors and a live preview](docs/admin-dashboard.png)
+
 ## What it does
 
 - Up to five reward tiers, each with a cart amount and a reward name.
