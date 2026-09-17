@@ -12,20 +12,20 @@ scopes = ""
 [webhooks]
 api_version = "2026-10"
 
-  [[webhooks.subscriptions]]
-  uri = "/webhooks/app/uninstalled"
-  topics = [ "app/uninstalled" ]
+  # Webhook URIs are resolved against application_url, which is Shopify's
+  # placeholder while the app runs from a dev tunnel, so Shopify rejects them on
+  # deploy. Uncomment both subscriptions once the app is hosted at a stable URL;
+  # the handlers already exist in app/routes/webhooks.app.*.tsx.
+  # [[webhooks.subscriptions]]
+  # uri = "/webhooks/app/uninstalled"
+  # topics = [ "app/uninstalled" ]
 
-  [[webhooks.subscriptions]]
-  uri = "/webhooks/app/scopes_update"
-  topics = [ "app/scopes_update" ]
+  # [[webhooks.subscriptions]]
+  # uri = "/webhooks/app/scopes_update"
+  # topics = [ "app/scopes_update" ]
 
 [auth]
 redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
 
 [build]
 automatically_update_urls_on_dev = true
-# The app URL is managed by `shopify app dev` (a tunnel that changes every run),
-# so deploys ship extensions only and leave URLs/webhooks untouched. Set this to
-# true once the app is hosted at a stable URL.
-include_config_on_deploy = false
