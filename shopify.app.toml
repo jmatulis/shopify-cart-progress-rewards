@@ -24,5 +24,8 @@ api_version = "2026-10"
 redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
 
 [build]
-include_config_on_deploy = true
 automatically_update_urls_on_dev = true
+# The app URL is managed by `shopify app dev` (a tunnel that changes every run),
+# so deploys ship extensions only and leave URLs/webhooks untouched. Set this to
+# true once the app is hosted at a stable URL.
+include_config_on_deploy = false
