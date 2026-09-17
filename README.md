@@ -1,6 +1,6 @@
 # Cart Progress Rewards
 
-A Shopify app that shows shoppers how close their cart is to the next reward — "You're $20.00 away from free shipping!" — and updates the bar live as they add items, without editing a single line of theme code.
+A Shopify app that shows shoppers how close their cart is to the next reward 
 
 It has two halves:
 
