@@ -78,7 +78,18 @@
 
     // textContent, not innerHTML: messages are merchant-entered text.
     root.querySelector(".cart-progress__message").textContent = message;
-    root.querySelector(".cart-progress__fill").style.width = percent + "%";
+
+    var fill = root.querySelector(".cart-progress__fill");
+    // The first draw should appear at its true width rather than sliding up
+    // from zero; later cart changes animate.
+    if (!root.dataset.drawn) {
+      root.dataset.drawn = "true";
+      fill.style.transition = "none";
+      requestAnimationFrame(function () {
+        fill.style.transition = "";
+      });
+    }
+    fill.style.width = percent + "%";
     var track = root.querySelector(".cart-progress__track");
     track.setAttribute("aria-valuenow", String(percent));
 
