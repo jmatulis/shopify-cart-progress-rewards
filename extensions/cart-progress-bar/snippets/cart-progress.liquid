@@ -1,0 +1,56 @@
+{%- comment -%}
+  Shared markup for the app block and the app embed.
+
+  Params:
+    rewards          - app.metafields.cart_rewards.config.value (saved in the admin app)
+    variant          - "block" or "embed"
+    position         - "top" or "bottom" (embed only)
+    hide_when_empty  - hide the bar while the cart is empty
+
+  The bar is drawn by assets/cart-progress.js from the data-config JSON below,
+  and redrawn whenever the theme changes the cart through the Ajax Cart API.
+{%- endcomment -%}
+
+{%- if rewards and rewards.enabled -%}
+  {%- capture initial_state -%}
+    {
+      "config": {{ rewards | json }},
+      "cart": {
+        "total_price": {{ cart.total_price | json }},
+        "item_count": {{ cart.item_count | json }},
+        "currency": {{ cart.currency.iso_code | json }}
+      },
+      "locale": {{ request.locale.iso_code | json }}
+    }
+  {%- endcapture -%}
+
+  <div
+    class="cart-progress cart-progress--{{ variant }}{% if position != blank %} cart-progress--{{ position }}{% endif %}"
+    data-cart-progress
+    data-hide-when-empty="{{ hide_when_empty }}"
+    data-config="{{ initial_state | strip_newlines | escape }}"
+    style="--cpr-bar: {{ rewards.style.barColor | escape }}; --cpr-track: {{ rewards.style.trackColor | escape }}; --cpr-text: {{ rewards.style.textColor | escape }};"
+    {% if hide_when_empty and cart.item_count == 0 %}hidden{% endif %}
+  >
+    <div class="cart-progress__inner">
+      <p class="cart-progress__message" aria-live="polite"></p>
+      <div
+        class="cart-progress__track"
+        role="progressbar"
+        aria-label="{{ 'cart_progress.progress_label' | t }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+      >
+        <div class="cart-progress__fill"></div>
+      </div>
+    </div>
+  </div>
+{%- elsif request.design_mode -%}
+  {%- comment -%} Only merchants in the theme editor see this. {%- endcomment -%}
+  <div class="cart-progress cart-progress--notice">
+    <p class="cart-progress__message">
+      {{ 'cart_progress.editor_notice' | t }}
+    </p>
+  </div>
+{%- endif -%}

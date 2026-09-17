@@ -1,0 +1,37 @@
+{% render 'cart-progress',
+  rewards: app.metafields.cart_rewards.config.value,
+  variant: 'embed',
+  position: block.settings.position,
+  hide_when_empty: block.settings.hide_when_empty
+%}
+
+{% schema %}
+{
+  "name": "Cart progress bar (site-wide)",
+  "target": "body",
+  "javascript": "cart-progress.js",
+  "stylesheet": "cart-progress.css",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows a fixed bar on every page. Reward tiers, messages and colors are set in the Cart Progress Rewards app."
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "options": [
+        { "value": "bottom", "label": "Bottom of screen" },
+        { "value": "top", "label": "Top of screen" }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_when_empty",
+      "label": "Hide when the cart is empty",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,85 @@
+.cart-progress {
+  --cpr-bar: #2c6ecb;
+  --cpr-track: #e3e3e3;
+  --cpr-text: #303030;
+  color: var(--cpr-text);
+  font-size: 0.95em;
+  line-height: 1.4;
+  padding: 12px 0;
+}
+
+.cart-progress[hidden] {
+  display: none;
+}
+
+.cart-progress__inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.cart-progress__message {
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.cart-progress__track {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--cpr-track);
+}
+
+.cart-progress__fill {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--cpr-bar);
+  transition: width 400ms ease;
+}
+
+/* A dot on the track for each tier; filled once that tier is unlocked. */
+.cart-progress__marker {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--cpr-track);
+  transform: translate(-50%, -50%);
+  transition: background-color 400ms ease;
+}
+
+.cart-progress__marker.is-reached {
+  background: var(--cpr-bar);
+}
+
+.cart-progress--embed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 10px 24px 14px;
+  background: #fff;
+  box-shadow: 0 0 12px rgb(0 0 0 / 0.12);
+}
+
+.cart-progress--top {
+  top: 0;
+}
+
+.cart-progress--bottom {
+  bottom: 0;
+}
+
+.cart-progress--notice {
+  padding: 12px;
+  border: 1px dashed currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-progress__fill,
+  .cart-progress__marker {
+    transition: none;
+  }
+}

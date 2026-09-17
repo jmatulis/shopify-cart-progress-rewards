@@ -1,0 +1,26 @@
+{% render 'cart-progress',
+  rewards: app.metafields.cart_rewards.config.value,
+  variant: 'block',
+  hide_when_empty: block.settings.hide_when_empty
+%}
+
+{% schema %}
+{
+  "name": "Cart progress bar",
+  "target": "section",
+  "javascript": "cart-progress.js",
+  "stylesheet": "cart-progress.css",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reward tiers, messages and colors are set in the Cart Progress Rewards app."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_when_empty",
+      "label": "Hide when the cart is empty",
+      "default": false
+    }
+  ]
+}
+{% endschema %}
